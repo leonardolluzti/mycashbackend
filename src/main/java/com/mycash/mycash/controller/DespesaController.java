@@ -43,7 +43,7 @@ public class DespesaController {
 		return repository.save(despesa);
 	}
 	
-	@PutMapping
+	@PutMapping(value = "{id}")
 	// http://localhost:9000/despesa/{id}
 	public ResponseEntity update(@PathVariable long id, @RequestBody Despesa despesa) {
 		return repository.findById(id)
@@ -58,7 +58,7 @@ public class DespesaController {
 				}).orElse(ResponseEntity.notFound().build());		
 	}
 	
-	@DeleteMapping
+	@DeleteMapping(path = {"/{id}"})
 	// http://localhost:9000/despesa/{id}
 	public ResponseEntity<?> delete(@PathVariable long id){
 		return repository.findById(id)
