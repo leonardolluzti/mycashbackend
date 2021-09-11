@@ -7,5 +7,5 @@ import com.mycash.mycash.model.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-	UserRepository findByUserName(String username);
+	//User findByUserName(String username);
 }
