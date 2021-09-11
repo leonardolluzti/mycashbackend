@@ -1,0 +1,10 @@
+package com.mycash.mycash.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping({"/userinformation"})
+public class UserInformationController {
+
+}
