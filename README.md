@@ -8,5 +8,5 @@ Tecnologias utilizadas:
 - Spring Boot.
 - Spring Data JPA.
 - Lombok
-- Banco de dados MySQL 8.
+- Banco de dados MySQL 8.0.26.
 - MySQL Workbench.
