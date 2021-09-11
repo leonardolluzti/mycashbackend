@@ -37,7 +37,7 @@ public class UserController {
 	}
 	
 	@PostMapping
-	// http://localhost:9000/receita/
+	// http://localhost:9000/user/
 	public User create(@RequestBody User user) {
 		return repository.save(user);
 	}
