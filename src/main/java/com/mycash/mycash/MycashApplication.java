@@ -2,10 +2,10 @@ package com.mycash.mycash;
 
 import java.util.stream.LongStream;
 
-import org.springframework.boot.CommandLineRunner;
+//import org.springframework.boot.CommandLineRunner;
+//import org.springframework.context.annotation.Bean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 import com.mycash.mycash.model.Despesa;
 import com.mycash.mycash.model.Receita;
@@ -19,12 +19,12 @@ public class MycashApplication {
 		SpringApplication.run(MycashApplication.class, args);	
 		
 	}
-	
+/*	
 	@Bean
 	CommandLineRunner init(DespesaRepository despesaRepository, ReceitaRepository receitaRepository) {
 		return args -> {				
 			//Despesas
-			despesaRepository.deleteAll();
+			//despesaRepository.deleteAll();
 			//@Query(value = "ALTER TABLE despesa AUTO_INCREMENT = 1;", nativeQuery = true) 			
 			LongStream.range(1, 10)
 			.mapToObj(i ->{
@@ -32,7 +32,7 @@ public class MycashApplication {
 				desp.setData(i+"-08-2021");
 				desp.setDescricao("TAKARO");
 				desp.setFixo(true);
-				desp.setTipo("Outros");
+				desp.setTipo(i);
 				desp.setValor("R$ "+i+i+".00");
 				return desp;
 			})
@@ -40,7 +40,7 @@ public class MycashApplication {
 			.forEach(System.out::println); 	
 			
 			//Receitas
-			receitaRepository.deleteAll();
+			//receitaRepository.deleteAll();
 			//@Query(value = "ALTER TABLE receita AUTO_INCREMENT = 1;", nativeQuery = true)
 			LongStream.range(1, 10)
 			.mapToObj(i ->{
@@ -48,7 +48,7 @@ public class MycashApplication {
 				r.setData("0"+i+"-08-2021");
 				r.setDescricao("TAKARO");
 				r.setFixo(true);
-				r.setTipo("Outros");
+				r.setTipo(i);
 				r.setValor("R$ "+i+i+".00");
 				return r;
 			})
@@ -56,5 +56,5 @@ public class MycashApplication {
 			.forEach(System.out::println);
 		};
 	}
-
+*/
 }

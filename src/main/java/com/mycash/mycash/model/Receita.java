@@ -19,7 +19,8 @@ public class Receita {
 	private Long id;
 	
 	private String valor;
-	private String tipo;
+	//private String tipo;
+	private long tipo;
 	private String data;
 	private String descricao;
 	private boolean fixo;
