@@ -24,7 +24,7 @@ public class UserInformationController {
 	
 	@GetMapping
 	// http://localhost:9000/userinfo
-	public List findAllRecipes() {
+	public List findAll() {
 		return repository.findAll();
 	}
 	
