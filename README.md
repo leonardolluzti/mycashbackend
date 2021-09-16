@@ -7,6 +7,7 @@ Tecnologias utilizadas:
 - IDE Eclipse 2021-03.
 - Spring Boot.
 - Spring Data JPA.
+- Spring Security.
 - Lombok
 - Banco de dados MySQL 8.0.26.
 - MySQL Workbench.
