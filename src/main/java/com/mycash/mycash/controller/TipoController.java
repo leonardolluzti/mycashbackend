@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,11 +24,13 @@ public class TipoController {
 	private TipoRepository repository;
 	
 	@GetMapping
+	@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo
 	public List findAll() {
 		return repository.findAll();
 	}
 	@GetMapping(value = "{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
 	public ResponseEntity findById(@PathVariable long id) {
 		return repository.findById(id)
@@ -36,12 +39,14 @@ public class TipoController {
 	}
 	
 	@PostMapping
+	@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/
 	public Tipo create(@RequestBody Tipo tipo) {
 		return repository.save(tipo);
 	}
 	
 	@PutMapping(value = "{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
 	public ResponseEntity update(@PathVariable long id, @RequestBody Tipo tipo) {
 		return repository.findById(id)
@@ -53,6 +58,7 @@ public class TipoController {
 	}
 	
 	@DeleteMapping(path = {"/{id}"})
+	@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
 	public ResponseEntity<?> delete(@PathVariable long id){
 		return repository.findById(id)
