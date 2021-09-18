@@ -31,8 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.csrf().disable();
 	}
 	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(customUserDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 }

@@ -24,13 +24,13 @@ public class TipoController {
 	private TipoRepository repository;
 	
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo
 	public List findAll() {
 		return repository.findAll();
 	}
 	@GetMapping(value = "{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
 	public ResponseEntity findById(@PathVariable long id) {
 		return repository.findById(id)
@@ -39,14 +39,14 @@ public class TipoController {
 	}
 	
 	@PostMapping
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/
 	public Tipo create(@RequestBody Tipo tipo) {
 		return repository.save(tipo);
 	}
 	
 	@PutMapping(value = "{id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
 	public ResponseEntity update(@PathVariable long id, @RequestBody Tipo tipo) {
 		return repository.findById(id)
@@ -58,7 +58,7 @@ public class TipoController {
 	}
 	
 	@DeleteMapping(path = {"/{id}"})
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
 	public ResponseEntity<?> delete(@PathVariable long id){
 		return repository.findById(id)
