@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,12 +37,14 @@ public class ReceitaController {
 	}
 	
 	@PostMapping
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/receita/
 	public Receita create(@RequestBody Receita receita) {
 		return repository.save(receita);
 	}
 	
 	@PutMapping(value = "{id}")
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/receita/{id}
 	public ResponseEntity update(@PathVariable long id, @RequestBody Receita receita) {
 		return repository.findById(id)
@@ -57,6 +60,7 @@ public class ReceitaController {
 	}
 	
 	@DeleteMapping(path = {"/{id}"})
+	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/receita/{id}
 	public ResponseEntity<?> delete(@PathVariable long id){
 		return repository.findById(id)

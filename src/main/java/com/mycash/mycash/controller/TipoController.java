@@ -14,24 +14,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mycash.mycash.model.Despesa;
-import com.mycash.mycash.repository.DespesaRepository;
+import com.mycash.mycash.model.Tipo;
+import com.mycash.mycash.repository.TipoRepository;
 
 @RestController
-@RequestMapping({"/despesa"})
-public class DespesaController {
-	
+@RequestMapping({"/tipo"})
+public class TipoController {
 	@Autowired
-	private DespesaRepository repository;
+	private TipoRepository repository;
 	
 	@GetMapping
-	// http://localhost:9000/despesa
-	public List findAllInvoices() {
+	//@PreAuthorize("hasRole('ADMIN')")
+	// http://localhost:9000/tipo
+	public List findAll() {
 		return repository.findAll();
 	}
-	
 	@GetMapping(value = "{id}")
-	// http://localhost:9000/despesa/{id}
+	//@PreAuthorize("hasRole('ADMIN')")
+	// http://localhost:9000/tipo/{id}
 	public ResponseEntity findById(@PathVariable long id) {
 		return repository.findById(id)
 				.map(record -> ResponseEntity.ok().body(record))
@@ -39,30 +39,27 @@ public class DespesaController {
 	}
 	
 	@PostMapping
-	// http://localhost:9000/despesa/
-	public Despesa create(@RequestBody Despesa despesa) {
-		return repository.save(despesa);
+	//@PreAuthorize("hasRole('ADMIN')")
+	// http://localhost:9000/tipo/
+	public Tipo create(@RequestBody Tipo tipo) {
+		return repository.save(tipo);
 	}
 	
 	@PutMapping(value = "{id}")
 	//@PreAuthorize("hasRole('ADMIN')")
-	// http://localhost:9000/despesa/{id}
-	public ResponseEntity update(@PathVariable long id, @RequestBody Despesa despesa) {
+	// http://localhost:9000/tipo/{id}
+	public ResponseEntity update(@PathVariable long id, @RequestBody Tipo tipo) {
 		return repository.findById(id)
-				.map(record -> {
-					record.setData(despesa.getData());
-					record.setDescricao(despesa.getDescricao());
-					record.setFixo(despesa.isFixo());
-					record.setTipo(despesa.getTipo());
-					record.setValor(despesa.getValor());
-					Despesa update = repository.save(record);
+				.map(record -> {				
+					record.setDescricao(tipo.getDescricao());					
+					Tipo update = repository.save(record);
 					return ResponseEntity.ok().body(update);
 				}).orElse(ResponseEntity.notFound().build());		
 	}
 	
 	@DeleteMapping(path = {"/{id}"})
 	//@PreAuthorize("hasRole('ADMIN')")
-	// http://localhost:9000/despesa/{id}
+	// http://localhost:9000/tipo/{id}
 	public ResponseEntity<?> delete(@PathVariable long id){
 		return repository.findById(id)
 				.map(record -> {
@@ -70,5 +67,5 @@ public class DespesaController {
 					return ResponseEntity.ok().body("Deletado com sucesso!");
 				}).orElse(ResponseEntity.notFound().build());
 	}
-	
+
 }
