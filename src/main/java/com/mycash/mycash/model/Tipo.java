@@ -31,6 +31,7 @@ public class Tipo implements Serializable{
 	private Despesa despesa;
 		
 	@ManyToOne
+	@JoinColumn(name="tipo", referencedColumnName="id")
 	private Receita receita;
 	
 }
