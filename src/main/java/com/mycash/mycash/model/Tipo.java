@@ -29,8 +29,8 @@ public class Tipo implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="tipo", referencedColumnName="id")
 	private Despesa despesa;
-	/*	
+		
 	@ManyToOne
 	private Receita receita;
-	*/
+	
 }
