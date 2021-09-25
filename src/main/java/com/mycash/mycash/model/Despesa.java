@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor	//Cria o construtor.
 @Data	//Cria nossos gets e sets, assim como nossos hashcodes, etc.
 @Entity //Definir quando uma classe é uma entidade espelho do banco de dados.
-public class Despesa {
+public class Despesa{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,5 +22,6 @@ public class Despesa {
 	private String data;
 	private String descricao;
 	private boolean fixo;	
-
+	
+	
 }

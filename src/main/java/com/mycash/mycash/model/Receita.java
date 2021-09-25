@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Receita {
+public class Receita{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -23,5 +23,5 @@ public class Receita {
 	private String data;
 	private String descricao;
 	private boolean fixo;
-
+		
 }
