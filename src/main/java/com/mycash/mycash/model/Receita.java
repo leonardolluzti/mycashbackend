@@ -1,5 +1,7 @@
 package com.mycash.mycash.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-public class Receita{
+public class Receita implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -23,5 +27,8 @@ public class Receita{
 	private String data;
 	private String descricao;
 	private boolean fixo;
-		
+/*
+	@OneToMany
+	private Tipo tipos;
+*/		
 }

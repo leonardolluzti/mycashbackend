@@ -1,9 +1,14 @@
 package com.mycash.mycash.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,6 +19,8 @@ import lombok.NoArgsConstructor;
 @Data	//Cria nossos gets e sets, assim como nossos hashcodes, etc.
 @Entity //Definir quando uma classe é uma entidade espelho do banco de dados.
 public class Despesa{
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -23,5 +30,6 @@ public class Despesa{
 	private String descricao;
 	private boolean fixo;	
 	
-	
+	@OneToMany(mappedBy = "despesa", cascade = {CascadeType.PERSIST})	
+	private List <Tipo> tipos = new ArrayList<>();
 }
