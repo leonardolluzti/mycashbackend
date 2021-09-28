@@ -35,22 +35,6 @@ public class UserController {
 				.substring("Basic".length()).trim();
 		return token;		
 	}
-/*	
-	@RequestMapping("/login1")
-	@GetMapping
-	// http://localhost:9000/login1
-	public List<String> login2(HttpServletRequest request) throws UnsuportedEncodingException{
-		// String t0 = request;
-		// System.out.println(t0);
-		String t1 = request.getHeader("Authorization");
-		System.out.println(t1);
-		String t2 = request.getHeader("Authorization").substring("Basic".length());
-		System.out.println(t2);
-		
-		//ESTUDO DE CRIPTOGRAFIA
-		
-	}
-*/	
 	//Lista todos os usuários
 	@GetMapping
 	@PreAuthorize("hasRole('ADMIN')")
