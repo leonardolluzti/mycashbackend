@@ -25,12 +25,14 @@ public class DespesaController {
 	@Autowired
 	private DespesaRepository repository;
 	
+	//Lista todas as despesas
 	@GetMapping
 	// http://localhost:9000/despesa
 	public List findAllInvoices() {
 		return repository.findAll();
 	}
 	
+	//Pesquisa despesa pelo id
 	@GetMapping(value = "{id}")
 	// http://localhost:9000/despesa/{id}
 	public ResponseEntity findById(@PathVariable long id) {
@@ -38,13 +40,14 @@ public class DespesaController {
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
+	//Cria despesa
 	@PostMapping
 	// http://localhost:9000/despesa/
 	public Despesa create(@RequestBody Despesa despesa) {
 		return repository.save(despesa);
 	}
 
+	//Atualiza despesa
 	@PutMapping(value = "{id}")
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/despesa/{id}
@@ -61,6 +64,7 @@ public class DespesaController {
 				}).orElse(ResponseEntity.notFound().build());		
 	}
 
+	//Apaga despesa
 	@DeleteMapping(path = {"/{id}"})
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/despesa/{id}

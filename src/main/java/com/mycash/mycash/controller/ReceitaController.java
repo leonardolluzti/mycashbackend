@@ -23,12 +23,13 @@ import com.mycash.mycash.repository.ReceitaRepository;
 public class ReceitaController {
 	@Autowired
 	private ReceitaRepository repository;
-	
+	//Lista todas as Receitas
 	@GetMapping
 	// http://localhost:9000/receita
 	public List findAllRecipes() {
 		return repository.findAll();
 	}
+	//Pesquisa Receita pelo id
 	@GetMapping(value = "{id}")
 	// http://localhost:9000/receita/{id}
 	public ResponseEntity findById(@PathVariable long id) {
@@ -36,14 +37,14 @@ public class ReceitaController {
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
+	//Cria Receita
 	@PostMapping
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/receita/
 	public Receita create(@RequestBody Receita receita) {
 		return repository.save(receita);
 	}
-
+	//Atualiza Receita
 	@PutMapping(value = "{id}")
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/receita/{id}
@@ -59,7 +60,7 @@ public class ReceitaController {
 					return ResponseEntity.ok().body(update);
 				}).orElse(ResponseEntity.notFound().build());		
 	}
-
+	//Apaga Receita
 	@DeleteMapping(path = {"/{id}"})
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/receita/{id}
