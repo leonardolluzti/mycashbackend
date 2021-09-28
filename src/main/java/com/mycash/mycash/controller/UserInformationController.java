@@ -21,13 +21,13 @@ import com.mycash.mycash.repository.UserInformationRepository;
 public class UserInformationController {
 	@Autowired
 	private UserInformationRepository repository;
-	
+	//Lista Informação de todos os usuários
 	@GetMapping
 	// http://localhost:9000/userinfo
 	public List findAll() {
 		return repository.findAll();
 	}
-	
+	//Pesquisa Informação do usuário pelo id	
 	@GetMapping(value = "{id}")
 	// http://localhost:9000/userinfo/{id}
 	public ResponseEntity findById(@PathVariable long id) {
@@ -35,26 +35,27 @@ public class UserInformationController {
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
+	//Cria Informação do usuário	
 	@PostMapping
 	// http://localhost:9000/userinfo/
 	public UserInformation create(@RequestBody UserInformation userinfo) {
 		return repository.save(userinfo);
 	}
 	
+	//Atualiza Informação do usuário	
 	@PutMapping(value = "{id}")
 	// http://localhost:9000/userinfo/{id}
-	public ResponseEntity update(@PathVariable long id, @RequestBody UserInformation userinfo) {
+	public ResponseEntity<?> update(@PathVariable long id, @RequestBody UserInformation userinfo) {
 		return repository.findById(id)
 				.map(record -> {
-					record.setId_autentication(userinfo.getId_autentication());
+					//record.setId_autentication(userinfo.getId_autentication());
 					record.setNome(userinfo.getNome());
 					record.setTelefone(userinfo.getTelefone());					
 					UserInformation update = repository.save(record);
 					return ResponseEntity.ok().body(update);
 				}).orElse(ResponseEntity.notFound().build());		
 	}
-	
+	//Deleta Informação do Usuário	
 	@DeleteMapping(path = {"/{id}"})
 	// http://localhost:9000/userinfo/{id}
 	public ResponseEntity<?> delete(@PathVariable long id){

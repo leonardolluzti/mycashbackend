@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +21,14 @@ import com.mycash.mycash.repository.TipoRepository;
 public class TipoController {
 	@Autowired
 	private TipoRepository repository;
-	
+	//Lista todos os tipos
 	@GetMapping
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo
 	public List findAll() {
 		return repository.findAll();
 	}
+	//Pesquisa Tipos pelo id
 	@GetMapping(value = "{id}")
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
@@ -37,7 +37,7 @@ public class TipoController {
 				.map(record -> ResponseEntity.ok().body(record))
 				.orElse(ResponseEntity.notFound().build());
 	}
-	
+	//Cria Tipo
 	@PostMapping
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/
@@ -45,18 +45,19 @@ public class TipoController {
 		return repository.save(tipo);
 	}
 	
+	//Atualisa Tipo
 	@PutMapping(value = "{id}")
-	//@PreAuthorize("hasRole('ADMIN')")
-	// http://localhost:9000/tipo/{id}
-	public ResponseEntity update(@PathVariable long id, @RequestBody Tipo tipo) {
-		return repository.findById(id)
-				.map(record -> {				
-					record.setDescricao(tipo.getDescricao());					
-					Tipo update = repository.save(record);
-					return ResponseEntity.ok().body(update);
-				}).orElse(ResponseEntity.notFound().build());		
-	}
-	
+		//@PreAuthorize("hasRole('ADMIN')")
+		// http://localhost:9000/tipo/{id}
+		public ResponseEntity<?> update(@PathVariable long id, @RequestBody Tipo tipo) {
+			return repository.findById(id)
+					.map(record -> {				
+						record.setDescricao(tipo.getDescricao());					
+						Tipo update = repository.save(record);
+						return ResponseEntity.ok().body(update);
+					}).orElse(ResponseEntity.notFound().build());		
+		}
+	//Apaga Tipo
 	@DeleteMapping(path = {"/{id}"})
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/tipo/{id}
