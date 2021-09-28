@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mycash.mycash.model.User;
 import com.mycash.mycash.repository.UserRepository;
-
+@CrossOrigin()
 @RestController
 @RequestMapping({"/user"})
 public class UserController {
@@ -81,7 +82,7 @@ public class UserController {
 	@PutMapping(value = "{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/user/{id}
-	public ResponseEntity update(@PathVariable long id, @RequestBody User user) {
+	public ResponseEntity<?> update(@PathVariable long id, @RequestBody User user) {
 		return repository.findById(id)
 				.map(record -> {
 					record.setUsername(user.getUsername());

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mycash.mycash.model.Despesa;
 import com.mycash.mycash.repository.DespesaRepository;
 
+@CrossOrigin()
 @RestController
 @RequestMapping({"/despesa"})
 public class DespesaController {
@@ -43,23 +44,23 @@ public class DespesaController {
 	public Despesa create(@RequestBody Despesa despesa) {
 		return repository.save(despesa);
 	}
-	
+
 	@PutMapping(value = "{id}")
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/despesa/{id}
-	public ResponseEntity update(@PathVariable long id, @RequestBody Despesa despesa) {
+	public ResponseEntity<?> update(@PathVariable long id, @RequestBody Despesa despesa) {
 		return repository.findById(id)
 				.map(record -> {
 					record.setData(despesa.getData());
 					record.setDescricao(despesa.getDescricao());
 					record.setFixo(despesa.isFixo());
-					record.setTipo(despesa.getTipo());
+					//record.setTipo(despesa.getTipo());
 					record.setValor(despesa.getValor());
 					Despesa update = repository.save(record);
 					return ResponseEntity.ok().body(update);
 				}).orElse(ResponseEntity.notFound().build());		
 	}
-	
+
 	@DeleteMapping(path = {"/{id}"})
 	//@PreAuthorize("hasRole('ADMIN')")
 	// http://localhost:9000/despesa/{id}

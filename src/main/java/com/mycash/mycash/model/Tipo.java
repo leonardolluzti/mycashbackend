@@ -23,11 +23,11 @@ public class Tipo{
 	private Long id;
 	private String descricao;		
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "despesa")
-	@JsonIgnore
-	private Despesa despesa;
-	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "receita")
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "tipo")
 	@JsonIgnore
 	private Receita receita;
+	
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "tipo")
+	@JsonIgnore
+	private Despesa despesa;
 }
